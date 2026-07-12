@@ -1,0 +1,512 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Moonlight Sea — Travel Through Music</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg: #0B1120;
+    --bg-deep: #060a14;
+    --accent: #60A5FA;
+    --moon: #FDE68A;
+    --text: #F8FAFC;
+    --text-dim: #94A3B8;
+    --card-radius: 24px;
+    --btn-radius: 9999px;
+    --glass: rgba(248,250,252,0.06);
+    --glass-border: rgba(248,250,252,0.12);
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    background:var(--bg);
+    color:var(--text);
+    font-family:'Manrope',sans-serif;
+    overflow-x:hidden;
+  }
+  @media (prefers-reduced-motion: reduce){
+    *{animation-duration:0.001ms !important; animation-iteration-count:1 !important; transition-duration:0.001ms !important;}
+  }
+  .serif{font-family:'Instrument Serif', serif;}
+  a{color:inherit;text-decoration:none;}
+  img{display:block;max-width:100%;}
+  ::selection{background:var(--accent);color:var(--bg-deep);}
+
+  /* ---------- NAV ---------- */
+  .nav{
+    position:fixed;top:0;left:0;right:0;z-index:100;
+    display:flex;align-items:center;justify-content:space-between;
+    padding:22px 5vw;
+    transition:background .4s ease, backdrop-filter .4s ease, border-color .4s ease, padding .4s ease;
+    border-bottom:1px solid transparent;
+  }
+  .nav.scrolled{
+    background:rgba(11,17,32,0.72);
+    backdrop-filter:blur(16px);
+    -webkit-backdrop-filter:blur(16px);
+    border-bottom:1px solid var(--glass-border);
+    padding:14px 5vw;
+  }
+  .nav-logo{font-family:'Instrument Serif',serif;font-size:1.5rem;letter-spacing:.5px;display:flex;align-items:center;gap:8px;}
+  .nav-logo .dot{width:7px;height:7px;border-radius:50%;background:var(--moon);box-shadow:0 0 10px var(--moon);}
+  .nav-menu{display:flex;gap:38px;font-size:.92rem;font-weight:500;color:var(--text-dim);}
+  .nav-menu a{position:relative;padding:4px 0;transition:color .25s;}
+  .nav-menu a:hover, .nav-menu a:focus-visible{color:var(--text);}
+  .nav-menu a::after{content:'';position:absolute;left:0;bottom:-2px;width:0;height:1px;background:var(--accent);transition:width .3s ease;}
+  .nav-menu a:hover::after{width:100%;}
+  .nav-right{display:flex;align-items:center;gap:20px;}
+  .search-btn{
+    width:38px;height:38px;border-radius:50%;
+    display:flex;align-items:center;justify-content:center;
+    background:var(--glass);border:1px solid var(--glass-border);
+    cursor:pointer;transition:background .25s,transform .25s;
+  }
+  .search-btn:hover{background:rgba(248,250,252,0.12);transform:scale(1.06);}
+
+  /* ---------- HERO ---------- */
+  .hero{
+    position:relative;height:100vh;min-height:680px;
+    display:flex;align-items:center;justify-content:center;
+    text-align:center;overflow:hidden;
+    background:radial-gradient(ellipse 80% 60% at 70% 15%, rgba(96,165,250,0.16), transparent 60%),
+               radial-gradient(ellipse 60% 50% at 20% 85%, rgba(253,230,138,0.06), transparent 60%),
+               linear-gradient(180deg, var(--bg-deep) 0%, var(--bg) 55%, #0d1526 100%);
+  }
+  .stars{position:absolute;inset:0;}
+  .star{position:absolute;border-radius:50%;background:#fff;opacity:0;animation:twinkle 4s ease-in-out infinite;}
+  @keyframes twinkle{0%,100%{opacity:0;}50%{opacity:var(--max-op,0.9);}}
+  .moon{
+    position:absolute;top:10%;right:12%;width:120px;height:120px;border-radius:50%;
+    background:radial-gradient(circle at 35% 32%, #FFF7DE, var(--moon) 55%, #f3d98a 100%);
+    box-shadow:0 0 60px 12px rgba(253,230,138,0.35), 0 0 140px 40px rgba(253,230,138,0.12);
+    animation:float 8s ease-in-out infinite;
+  }
+  @keyframes float{0%,100%{transform:translateY(0);}50%{transform:translateY(-18px);}}
+  .ocean-line{
+    position:absolute;bottom:0;left:0;right:0;height:38%;
+    background:linear-gradient(180deg, transparent, rgba(96,165,250,0.08) 40%, rgba(11,17,32,0.9));
+  }
+  .hero-content{position:relative;z-index:2;padding:0 20px;}
+  .eyebrow{
+    font-size:.78rem;letter-spacing:4px;font-weight:700;color:var(--accent);
+    text-transform:uppercase;margin-bottom:22px;opacity:0;animation:fadeUp .9s ease .1s forwards;
+  }
+  .hero-title{
+    font-family:'Instrument Serif',serif;font-size:clamp(3.4rem,9vw,7.2rem);line-height:1;
+    letter-spacing:.5px;
+    background:linear-gradient(180deg,#fff, #cdd8ea 70%, var(--accent));
+    -webkit-background-clip:text;background-clip:text;color:transparent;
+    opacity:0;animation:fadeUp .9s ease .25s forwards;
+  }
+  .hero-sub{
+    margin-top:20px;font-size:1.05rem;color:var(--text-dim);font-weight:500;letter-spacing:1px;
+    opacity:0;animation:fadeUp .9s ease .4s forwards;
+  }
+  .hero-kr{font-size:1.05rem;font-weight:600;color:var(--text);margin-top:6px;
+    opacity:0;animation:fadeUp .9s ease .5s forwards;}
+  @keyframes fadeUp{from{opacity:0;transform:translateY(22px);}to{opacity:1;transform:translateY(0);}}
+  .hero-actions{
+    margin-top:44px;display:flex;gap:16px;justify-content:center;flex-wrap:wrap;
+    opacity:0;animation:fadeUp .9s ease .65s forwards;
+  }
+  .btn{
+    border-radius:var(--btn-radius);padding:15px 34px;font-size:.92rem;font-weight:700;
+    cursor:pointer;border:none;transition:transform .3s ease, box-shadow .3s ease, background .3s ease;
+    display:inline-flex;align-items:center;gap:8px;
+  }
+  .btn-primary{background:var(--accent);color:#08101F;}
+  .btn-primary:hover{transform:translateY(-2px);box-shadow:0 10px 30px rgba(96,165,250,0.35);}
+  .btn-ghost{background:var(--glass);border:1px solid var(--glass-border);color:var(--text);backdrop-filter:blur(8px);}
+  .btn-ghost:hover{background:rgba(248,250,252,0.12);transform:translateY(-2px);}
+  .scroll-cue{
+    position:absolute;bottom:34px;left:50%;transform:translateX(-50%);
+    font-size:.7rem;letter-spacing:3px;color:var(--text-dim);text-transform:uppercase;
+    display:flex;flex-direction:column;align-items:center;gap:10px;opacity:0;
+    animation:fadeUp 1s ease 1s forwards;
+  }
+  .scroll-line{width:1px;height:34px;background:linear-gradient(var(--accent),transparent);animation:scrollPulse 2s ease-in-out infinite;}
+  @keyframes scrollPulse{0%,100%{opacity:.3;}50%{opacity:1;}}
+
+  /* ---------- SECTION shared ---------- */
+  section{padding:120px 5vw;}
+  .section-head{display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:48px;gap:24px;flex-wrap:wrap;}
+  .section-eyebrow{font-size:.75rem;letter-spacing:3px;color:var(--accent);font-weight:700;text-transform:uppercase;margin-bottom:12px;}
+  .section-title{font-family:'Instrument Serif',serif;font-size:clamp(1.9rem,3.4vw,2.8rem);font-weight:400;}
+  .section-link{font-size:.85rem;font-weight:600;color:var(--text-dim);display:flex;align-items:center;gap:6px;transition:color .25s;}
+  .section-link:hover{color:var(--accent);}
+
+  .reveal{opacity:0;transform:translateY(28px);transition:opacity .8s ease, transform .8s ease;}
+  .reveal.in{opacity:1;transform:translateY(0);}
+
+  /* ---------- TODAY'S JOURNEY ---------- */
+  .today-card{
+    position:relative;border-radius:32px;overflow:hidden;
+    display:grid;grid-template-columns:1.1fr 1fr;min-height:420px;
+    border:1px solid var(--glass-border);
+    background:linear-gradient(120deg, rgba(96,165,250,0.14), rgba(11,17,32,0.4));
+  }
+  .today-visual{
+    position:relative;background:
+      radial-gradient(circle at 30% 30%, rgba(253,230,138,0.25), transparent 55%),
+      radial-gradient(circle at 75% 70%, rgba(96,165,250,0.35), transparent 55%),
+      linear-gradient(135deg,#0d1730,#182a4a 60%,#213b63);
+    overflow:hidden;
+  }
+  .today-visual::before{
+    content:'';position:absolute;inset:0;
+    background-image:repeating-linear-gradient(115deg, rgba(255,255,255,0.05) 0 1px, transparent 1px 90px);
+  }
+  .today-tag{
+    position:absolute;top:26px;left:26px;background:rgba(8,16,31,0.55);backdrop-filter:blur(6px);
+    border:1px solid var(--glass-border);padding:8px 16px;border-radius:var(--btn-radius);
+    font-size:.72rem;letter-spacing:2px;font-weight:700;color:var(--moon);text-transform:uppercase;
+  }
+  .today-info{padding:52px 48px;display:flex;flex-direction:column;justify-content:center;gap:16px;}
+  .today-place{font-size:.85rem;color:var(--text-dim);font-weight:600;letter-spacing:1px;}
+  .today-title{font-family:'Instrument Serif',serif;font-size:2.4rem;}
+  .today-desc{color:var(--text-dim);line-height:1.7;font-size:.98rem;max-width:44ch;}
+  .today-meta{display:flex;gap:22px;margin-top:6px;font-size:.82rem;color:var(--text-dim);}
+  .today-meta span{display:flex;align-items:center;gap:6px;}
+  .today-meta b{color:var(--text);font-weight:700;}
+
+  /* ---------- FEATURED (horizontal scroll) ---------- */
+  .scroll-row{
+    display:flex;gap:22px;overflow-x:auto;padding-bottom:12px;scroll-snap-type:x proximity;
+    -ms-overflow-style:none;scrollbar-width:none;
+  }
+  .scroll-row::-webkit-scrollbar{display:none;}
+  .journey-card{
+    position:relative;flex:0 0 300px;height:400px;border-radius:var(--card-radius);
+    overflow:hidden;scroll-snap-align:start;cursor:pointer;
+    border:1px solid var(--glass-border);
+    transition:transform .45s cubic-bezier(.2,.8,.2,1), box-shadow .45s ease;
+  }
+  .journey-card:hover, .journey-card:focus-visible{
+    transform:translateY(-8px) scale(1.03);
+    box-shadow:0 24px 60px -12px rgba(96,165,250,0.35);
+  }
+  .jc-bg{position:absolute;inset:0;transition:transform .6s ease;}
+  .journey-card:hover .jc-bg{transform:scale(1.08);}
+  .jc-overlay{position:absolute;inset:0;background:linear-gradient(180deg, transparent 30%, rgba(6,10,20,0.92) 95%);}
+  .jc-content{position:absolute;left:0;right:0;bottom:0;padding:24px;}
+  .jc-country{font-size:.7rem;letter-spacing:2px;color:var(--moon);font-weight:700;text-transform:uppercase;margin-bottom:6px;}
+  .jc-city{font-family:'Instrument Serif',serif;font-size:1.7rem;}
+  .jc-sub{font-size:.82rem;color:var(--text-dim);margin-top:4px;}
+  .jc-duration{position:absolute;top:18px;right:18px;background:rgba(6,10,20,0.55);backdrop-filter:blur(6px);
+    padding:5px 12px;border-radius:var(--btn-radius);font-size:.72rem;font-weight:700;}
+  .jc-play{
+    position:absolute;top:18px;left:18px;width:42px;height:42px;border-radius:50%;
+    background:rgba(248,250,252,0.12);border:1px solid var(--glass-border);backdrop-filter:blur(6px);
+    display:flex;align-items:center;justify-content:center;opacity:0;transform:scale(.8);
+    transition:opacity .35s ease, transform .35s ease;
+  }
+  .journey-card:hover .jc-play{opacity:1;transform:scale(1);}
+
+  /* ---------- CITY COLLECTION ---------- */
+  .city-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:20px;}
+  .city-card{
+    position:relative;border-radius:var(--card-radius);overflow:hidden;aspect-ratio:3/4;cursor:pointer;
+    border:1px solid var(--glass-border);
+  }
+  .city-bg{position:absolute;inset:0;transition:transform .6s ease;}
+  .city-card:hover .city-bg{transform:scale(1.1);}
+  .city-overlay{position:absolute;inset:0;background:linear-gradient(180deg, rgba(6,10,20,0.1), rgba(6,10,20,0.92));}
+  .city-name{position:absolute;left:22px;bottom:22px;font-family:'Instrument Serif',serif;font-size:1.6rem;}
+  .city-count{position:absolute;left:22px;bottom:2px;transform:translateY(20px);font-size:.75rem;color:var(--text-dim);}
+
+  /* ---------- STORIES ---------- */
+  .story-grid{display:grid;grid-template-columns:1.3fr 1fr 1fr;gap:22px;}
+  .story-card{border-radius:var(--card-radius);overflow:hidden;position:relative;border:1px solid var(--glass-border);cursor:pointer;}
+  .story-card.large{grid-row:span 2;}
+  .story-bg{position:absolute;inset:0;transition:transform .6s ease;}
+  .story-card:hover .story-bg{transform:scale(1.06);}
+  .story-overlay{position:absolute;inset:0;background:linear-gradient(180deg, transparent 20%, rgba(6,10,20,0.94));}
+  .story-body{position:absolute;left:0;right:0;bottom:0;padding:26px;}
+  .story-read{font-size:.72rem;color:var(--moon);font-weight:700;letter-spacing:1.5px;text-transform:uppercase;margin-bottom:8px;}
+  .story-title{font-family:'Instrument Serif',serif;font-size:1.5rem;line-height:1.25;}
+  .story-card.large .story-title{font-size:2rem;}
+  .story-excerpt{color:var(--text-dim);font-size:.85rem;margin-top:8px;max-width:38ch;}
+
+  /* ---------- FOOTER ---------- */
+  footer{
+    padding:70px 5vw 40px;border-top:1px solid var(--glass-border);
+    background:linear-gradient(180deg, transparent, rgba(96,165,250,0.03));
+  }
+  .footer-top{display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:40px;margin-bottom:50px;}
+  .footer-brand .nav-logo{margin-bottom:10px;}
+  .footer-tag{color:var(--text-dim);font-size:.9rem;max-width:32ch;line-height:1.6;}
+  .footer-social{display:flex;gap:14px;}
+  .social-btn{
+    width:42px;height:42px;border-radius:50%;background:var(--glass);border:1px solid var(--glass-border);
+    display:flex;align-items:center;justify-content:center;transition:background .25s, transform .25s;
+  }
+  .social-btn:hover{background:var(--accent);color:#08101F;transform:translateY(-3px);}
+  .footer-bottom{display:flex;justify-content:space-between;color:var(--text-dim);font-size:.8rem;flex-wrap:wrap;gap:12px;
+    padding-top:26px;border-top:1px solid var(--glass-border);}
+
+  /* ---------- RESPONSIVE ---------- */
+  @media (max-width: 980px){
+    .nav-menu{display:none;}
+    .today-card{grid-template-columns:1fr;}
+    .today-visual{min-height:240px;}
+    .city-grid{grid-template-columns:repeat(2,1fr);}
+    .story-grid{grid-template-columns:1fr;}
+    .story-card.large{grid-row:span 1;}
+    section{padding:80px 6vw;}
+  }
+  @media (max-width: 560px){
+    .city-grid{grid-template-columns:1fr 1fr;}
+    .hero-actions{flex-direction:column;width:100%;}
+    .btn{width:100%;justify-content:center;}
+  }
+
+  :focus-visible{outline:2px solid var(--accent);outline-offset:3px;}
+</style>
+</head>
+<body>
+
+<nav class="nav" id="nav">
+  <div class="nav-logo"><span class="dot"></span>Moonlight Sea</div>
+  <div class="nav-menu">
+    <a href="#featured">Journey</a>
+    <a href="#cities">Cities</a>
+    <a href="#stories">Stories</a>
+    <a href="#about">About</a>
+    <a href="#contact">Contact</a>
+  </div>
+  <div class="nav-right">
+    <div class="search-btn" role="button" aria-label="검색" tabindex="0">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+    </div>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="stars" id="stars"></div>
+  <div class="moon"></div>
+  <div class="ocean-line"></div>
+  <div class="hero-content">
+    <div class="eyebrow">Travel Through Music</div>
+    <h1 class="hero-title">Moonlight Sea</h1>
+    <p class="hero-sub">MUSIC · CITIES · STORIES</p>
+    <p class="hero-kr">음악으로 떠나는 여행</p>
+    <div class="hero-actions">
+      <button class="btn btn-primary" id="startJourneyBtn">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+        Start Journey
+      </button>
+      <a href="#cities" class="btn btn-ghost">Browse Cities</a>
+    </div>
+  </div>
+  <div class="scroll-cue"><span>Scroll</span><div class="scroll-line"></div></div>
+</header>
+
+<section id="today">
+  <div class="section-head reveal">
+    <div>
+      <div class="section-eyebrow">Tonight's Pick</div>
+      <h2 class="section-title">Today's Journey</h2>
+    </div>
+  </div>
+  <div class="today-card reveal">
+    <div class="today-visual">
+      <div class="today-tag">Now Playing</div>
+    </div>
+    <div class="today-info">
+      <div class="today-place">SEOUL · SOUTH KOREA</div>
+      <h3 class="today-title">Neon Hangang</h3>
+      <p class="today-desc">한강을 따라 흐르는 늦은 밤의 신스팝. 도시의 불빛이 강물 위에 번지는 순간을 담은 여정입니다.</p>
+      <div class="today-meta">
+        <span>⏱ <b>42 min</b></span>
+        <span>🌙 <b>Night Drive</b></span>
+        <span>🎧 <b>Synth-pop</b></span>
+      </div>
+      <div style="margin-top:10px;">
+        <button class="btn btn-primary" style="padding:13px 28px;font-size:.85rem;">Play Journey</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="featured">
+  <div class="section-head reveal">
+    <div>
+      <div class="section-eyebrow">Curated</div>
+      <h2 class="section-title">Featured Journeys</h2>
+    </div>
+    <a href="#" class="section-link">More Journeys →</a>
+  </div>
+  <div class="scroll-row reveal" id="journeyRow"></div>
+</section>
+
+<section id="cities">
+  <div class="section-head reveal">
+    <div>
+      <div class="section-eyebrow">Explore</div>
+      <h2 class="section-title">City Collection</h2>
+    </div>
+  </div>
+  <div class="city-grid reveal" id="cityGrid"></div>
+</section>
+
+<section id="stories">
+  <div class="section-head reveal">
+    <div>
+      <div class="section-eyebrow">Magazine</div>
+      <h2 class="section-title">Stories</h2>
+    </div>
+    <a href="#" class="section-link">All Stories →</a>
+  </div>
+  <div class="story-grid reveal" id="storyGrid"></div>
+</section>
+
+<footer id="contact">
+  <div class="footer-top">
+    <div class="footer-brand">
+      <div class="nav-logo"><span class="dot"></span>Moonlight Sea</div>
+      <p class="footer-tag">Travel Through Music — 음악으로 떠나는 여행. 도시마다 다른 밤의 소리를 따라갑니다.</p>
+    </div>
+    <div class="footer-social">
+      <a class="social-btn" href="#" aria-label="YouTube"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M23 12s0-3.6-.46-5.2a3 3 0 0 0-2.1-2.1C18.8 4.2 12 4.2 12 4.2s-6.8 0-8.44.5a3 3 0 0 0-2.1 2.1C1 8.4 1 12 1 12s0 3.6.46 5.2a3 3 0 0 0 2.1 2.1c1.64.5 8.44.5 8.44.5s6.8 0 8.44-.5a3 3 0 0 0 2.1-2.1C23 15.6 23 12 23 12z"/><polygon points="9.75,15.02 15.5,12 9.75,8.98" fill="#0B1120"/></svg></a>
+      <a class="social-btn" href="#" aria-label="Instagram"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4.2"/><circle cx="17.4" cy="6.6" r="1"/></svg></a>
+      <a class="social-btn" href="#" aria-label="Spotify"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="12" r="11"/><path d="M6.5 9.5c3.2-1 7.4-.6 10 1M7 13c2.6-.7 5.8-.4 8 1M7.5 16.3c2-.5 4.5-.3 6.3.9" stroke="#0B1120" stroke-width="1.4" fill="none" stroke-linecap="round"/></svg></a>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2026 Moonlight Sea. All rights reserved.</span>
+    <span>Made for people who travel by ear.</span>
+  </div>
+</footer>
+
+<script>
+  // Nav scroll state
+  const nav = document.getElementById('nav');
+  window.addEventListener('scroll', () => {
+    nav.classList.toggle('scrolled', window.scrollY > 40);
+  });
+
+  // Stars field
+  const starsWrap = document.getElementById('stars');
+  const starCount = 70;
+  for(let i=0;i<starCount;i++){
+    const s = document.createElement('div');
+    s.className='star';
+    const size = Math.random()*2 + 1;
+    s.style.width = size+'px';
+    s.style.height = size+'px';
+    s.style.left = Math.random()*100+'%';
+    s.style.top = Math.random()*70+'%';
+    s.style.setProperty('--max-op', (Math.random()*0.6+0.3).toFixed(2));
+    s.style.animationDelay = (Math.random()*5)+'s';
+    s.style.animationDuration = (3+Math.random()*3)+'s';
+    starsWrap.appendChild(s);
+  }
+
+  // Data
+  const journeys = [
+    {city:'Tokyo', country:'Japan', title:'Shibuya After Hours', mood:'City Pop', duration:'38 min', grad:'linear-gradient(135deg,#1a1440,#3a2a6b 60%,#5b3d8f)'},
+    {city:'Seoul', country:'South Korea', title:'Neon Hangang', mood:'Synth-pop', duration:'42 min', grad:'linear-gradient(135deg,#101a30,#1c3459 60%,#2f5b8f)'},
+    {city:'Jeju', country:'South Korea', title:'Island Wind', mood:'Acoustic', duration:'35 min', grad:'linear-gradient(135deg,#0f2b28,#1d4a42 60%,#2f7a6a)'},
+    {city:'Gwangju', country:'South Korea', title:'Rain on Chungjang-ro', mood:'Lo-fi Jazz', duration:'31 min', grad:'linear-gradient(135deg,#241a30,#3d2a52 60%,#5c4179)'},
+    {city:'Paris', country:'France', title:'Left Bank Nocturne', mood:'Chanson', duration:'40 min', grad:'linear-gradient(135deg,#2a1420,#4a2438 60%,#743a58)'},
+    {city:'London', country:'United Kingdom', title:'Thames at Midnight', mood:'Trip-hop', duration:'44 min', grad:'linear-gradient(135deg,#141b26,#243447 60%,#3a5570)'}
+  ];
+
+  const cities = [
+    {name:'Tokyo', count:'12 Journeys', grad:'linear-gradient(160deg,#1a1440,#5b3d8f)'},
+    {name:'Seoul', count:'9 Journeys', grad:'linear-gradient(160deg,#101a30,#2f5b8f)'},
+    {name:'Jeju', count:'6 Journeys', grad:'linear-gradient(160deg,#0f2b28,#2f7a6a)'},
+    {name:'Gwangju', count:'5 Journeys', grad:'linear-gradient(160deg,#241a30,#5c4179)'}
+  ];
+
+  const stories = [
+    {title:'광주의 밤, 재즈가 흐르는 골목', read:'8 min read', excerpt:'충장로 뒷골목에서 만난 로파이 재즈 바 이야기.', grad:'linear-gradient(160deg,#241a30,#5c4179)', large:true},
+    {title:'Why Tokyo Sounds Like Neon', read:'5 min read', grad:'linear-gradient(160deg,#1a1440,#5b3d8f)'},
+    {title:'Jeju, in 3/4 Time', read:'4 min read', grad:'linear-gradient(160deg,#0f2b28,#2f7a6a)'}
+  ];
+
+  const journeyRow = document.getElementById('journeyRow');
+  journeys.forEach(j => {
+    const el = document.createElement('div');
+    el.className='journey-card';
+    el.tabIndex = 0;
+    el.innerHTML = `
+      <div class="jc-bg" style="background:${j.grad}"></div>
+      <div class="jc-overlay"></div>
+      <div class="jc-duration">${j.duration}</div>
+      <div class="jc-play">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="#F8FAFC"><path d="M8 5v14l11-7z"/></svg>
+      </div>
+      <div class="jc-content">
+        <div class="jc-country">${j.country}</div>
+        <div class="jc-city">${j.city}</div>
+        <div class="jc-sub">${j.title} · ${j.mood}</div>
+      </div>
+    `;
+    journeyRow.appendChild(el);
+  });
+
+  const cityGrid = document.getElementById('cityGrid');
+  cities.forEach(c => {
+    const el = document.createElement('div');
+    el.className='city-card';
+    el.tabIndex = 0;
+    el.innerHTML = `
+      <div class="city-bg" style="background:${c.grad}"></div>
+      <div class="city-overlay"></div>
+      <div class="city-name">${c.name}</div>
+      <div class="city-count">${c.count}</div>
+    `;
+    cityGrid.appendChild(el);
+  });
+
+  const storyGrid = document.getElementById('storyGrid');
+  stories.forEach(s => {
+    const el = document.createElement('div');
+    el.className='story-card' + (s.large ? ' large' : '');
+    el.tabIndex = 0;
+    el.innerHTML = `
+      <div class="story-bg" style="background:${s.grad}"></div>
+      <div class="story-overlay"></div>
+      <div class="story-body">
+        <div class="story-read">${s.read}</div>
+        <div class="story-title">${s.title}</div>
+        ${s.excerpt ? `<div class="story-excerpt">${s.excerpt}</div>` : ''}
+      </div>
+    `;
+    storyGrid.appendChild(el);
+  });
+
+  // Start Journey -> random pick
+  document.getElementById('startJourneyBtn').addEventListener('click', () => {
+    const pick = journeys[Math.floor(Math.random()*journeys.length)];
+    document.getElementById('today').scrollIntoView({behavior:'smooth'});
+    const title = document.querySelector('.today-title');
+    const place = document.querySelector('.today-place');
+    const desc = document.querySelector('.today-desc');
+    title.textContent = pick.title;
+    place.textContent = `${pick.city.toUpperCase()} · ${pick.country.toUpperCase()}`;
+    desc.textContent = `${pick.city}의 밤을 닮은 ${pick.mood} 트랙으로 떠나는 여정입니다.`;
+    document.querySelector('.today-visual').style.background =
+      `${pick.grad}`;
+  });
+
+  // Scroll reveal
+  const revealEls = document.querySelectorAll('.reveal');
+  const io = new IntersectionObserver((entries)=>{
+    entries.forEach(entry=>{
+      if(entry.isIntersecting){
+        entry.target.classList.add('in');
+        io.unobserve(entry.target);
+      }
+    });
+  }, {threshold:0.15});
+  revealEls.forEach(el=>io.observe(el));
+</script>
+
+</body>
+</html>
