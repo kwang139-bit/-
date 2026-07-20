@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Journey — Moonlight Sea</title>
+<meta name="description" content="Moonlight Sea의 음악 여행 저니. 도시의 밤을 닮은 큐레이션 트랙과 함께 떠나는 여정을 만나보세요.">
+<link rel="canonical" href="https://glittery-yeot-c436d1.netlify.app/journey.html">
+
+<meta property="og:type" content="music.playlist">
+<meta property="og:site_name" content="Moonlight Sea">
+<meta property="og:title" content="Journey — Moonlight Sea">
+<meta property="og:description" content="도시의 밤을 닮은 큐레이션 음악 저니, Moonlight Sea.">
+<meta property="og:image" content="https://glittery-yeot-c436d1.netlify.app/images/hero-moon-ocean.jpg">
+<meta property="og:url" content="https://glittery-yeot-c436d1.netlify.app/journey.html">
+<meta property="og:locale" content="ko_KR">
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Journey — Moonlight Sea">
+<meta name="twitter:description" content="도시의 밤을 닮은 큐레이션 음악 저니.">
+<meta name="twitter:image" content="https://glittery-yeot-c436d1.netlify.app/images/hero-moon-ocean.jpg">
+
+<link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
+<link rel="apple-touch-icon" sizes="180x180" href="favicon-180.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#0B1120; --bg-deep:#060a14; --accent:#60A5FA; --moon:#FDE68A;
+    --text:#F8FAFC; --text-dim:#94A3B8; --card-radius:24px; --btn-radius:9999px;
+    --glass:rgba(248,250,252,0.06); --glass-border:rgba(248,250,252,0.12);
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{background:var(--bg);color:var(--text);font-family:'Manrope',sans-serif;}
+  .serif{font-family:'Instrument Serif',serif;}
+  a{color:inherit;text-decoration:none;}
+  img{display:block;max-width:100%;}
+
+  .nav{
+    position:sticky;top:0;z-index:100;display:flex;align-items:center;justify-content:space-between;
+    padding:18px 5vw;background:rgba(11,17,32,0.72);backdrop-filter:blur(16px);
+    border-bottom:1px solid var(--glass-border);
+  }
+  .nav-logo{font-family:'Instrument Serif',serif;font-size:1.3rem;display:flex;align-items:center;gap:8px;}
+  .nav-logo .dot{width:7px;height:7px;border-radius:50%;background:var(--moon);box-shadow:0 0 10px var(--moon);}
+  .back-link{font-size:.85rem;color:var(--text-dim);display:flex;align-items:center;gap:6px;transition:color .25s;}
+  .back-link:hover{color:var(--text);}
+
+  /* HERO */
+  .jhero{
+    position:relative;min-height:78vh;display:flex;align-items:flex-end;
+    background-size:cover;background-position:center;
+  }
+  .jhero-overlay{
+    position:absolute;inset:0;
+    background:linear-gradient(180deg, rgba(6,10,20,0.25) 0%, rgba(6,10,20,0.55) 55%, rgba(6,10,20,0.96) 100%);
+  }
+  .jhero-content{position:relative;z-index:2;padding:70px 5vw 56px;width:100%;}
+  .jhero-place{font-size:.8rem;letter-spacing:3px;color:var(--moon);font-weight:700;text-transform:uppercase;margin-bottom:16px;}
+  .jhero-title{font-family:'Instrument Serif',serif;font-size:clamp(2.6rem,6vw,5rem);line-height:1.05;max-width:16ch;}
+  .jhero-sub{margin-top:14px;color:var(--text-dim);font-size:1rem;max-width:52ch;line-height:1.7;}
+  .jhero-actions{margin-top:32px;display:flex;gap:14px;flex-wrap:wrap;align-items:center;}
+  .btn{border-radius:var(--btn-radius);padding:15px 32px;font-size:.9rem;font-weight:700;cursor:pointer;border:none;
+    transition:transform .3s ease, box-shadow .3s ease, background .3s ease;display:inline-flex;align-items:center;gap:8px;}
+  .btn-primary{background:var(--accent);color:#08101F;}
+  .btn-primary:hover{transform:translateY(-2px);box-shadow:0 10px 30px rgba(96,165,250,0.35);}
+  .btn-ghost{background:var(--glass);border:1px solid var(--glass-border);color:var(--text);backdrop-filter:blur(8px);}
+  .btn-ghost:hover{background:rgba(248,250,252,0.12);}
+  .tag-row{display:flex;gap:10px;flex-wrap:wrap;margin-top:20px;}
+  .tag-chip{padding:7px 16px;border-radius:var(--btn-radius);background:var(--glass);border:1px solid var(--glass-border);
+    font-size:.76rem;color:var(--text-dim);font-weight:600;}
+
+  section{padding:80px 5vw;}
+  .section-eyebrow{font-size:.72rem;letter-spacing:3px;color:var(--accent);font-weight:700;text-transform:uppercase;margin-bottom:14px;}
+  .section-title{font-family:'Instrument Serif',serif;font-size:clamp(1.7rem,3vw,2.3rem);margin-bottom:24px;}
+
+  /* ABOUT */
+  .about-grid{display:grid;grid-template-columns:1.4fr 1fr;gap:60px;align-items:start;}
+  .about-desc{color:var(--text-dim);line-height:1.9;font-size:1.02rem;max-width:58ch;}
+  .meta-list{border-radius:20px;border:1px solid var(--glass-border);background:var(--glass);padding:28px;}
+  .meta-row{display:flex;justify-content:space-between;padding:14px 0;border-bottom:1px solid var(--glass-border);font-size:.9rem;}
+  .meta-row:last-child{border-bottom:none;}
+  .meta-row span:first-child{color:var(--text-dim);}
+  .meta-row span:last-child{font-weight:700;}
+
+  /* PLAYER */
+  .player-wrap{border-radius:28px;overflow:hidden;border:1px solid var(--glass-border);aspect-ratio:16/9;position:relative;}
+  .player-wrap iframe{width:100%;height:100%;border:0;display:block;}
+  .player-placeholder{
+    position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:16px;
+    background:linear-gradient(160deg, rgba(11,17,32,.7), rgba(11,17,32,.4)), var(--jphoto) center/cover no-repeat;
+    text-align:center;padding:24px;
+  }
+  .play-circle{width:74px;height:74px;border-radius:50%;background:rgba(248,250,252,0.14);border:1px solid var(--glass-border);
+    backdrop-filter:blur(6px);display:flex;align-items:center;justify-content:center;}
+  .player-placeholder p{color:var(--text-dim);font-size:.88rem;max-width:34ch;}
+
+  /* GALLERY */
+  .gallery-grid{display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:16px;height:420px;}
+  .gallery-grid > div{border-radius:var(--card-radius);overflow:hidden;background-size:cover;background-position:center;
+    border:1px solid var(--glass-border);}
+  .gallery-grid > div:first-child{grid-row:span 2;}
+  .gallery-soon{display:flex;align-items:center;justify-content:center;color:var(--text-dim);font-size:.8rem;
+    background:var(--glass) !important;border:1px dashed var(--glass-border) !important;text-align:center;padding:10px;}
+
+  /* RELATED */
+  .scroll-row{display:flex;gap:20px;overflow-x:auto;padding-bottom:10px;scroll-snap-type:x proximity;
+    -ms-overflow-style:none;scrollbar-width:none;}
+  .scroll-row::-webkit-scrollbar{display:none;}
+  .rel-card{position:relative;flex:0 0 260px;height:330px;border-radius:var(--card-radius);overflow:hidden;
+    scroll-snap-align:start;display:block;border:1px solid var(--glass-border);
+    transition:transform .4s ease, box-shadow .4s ease;}
+  .rel-card:hover{transform:translateY(-6px);box-shadow:0 20px 50px -14px rgba(96,165,250,.35);}
+  .rel-bg{position:absolute;inset:0;background-size:cover;background-position:center;}
+  .rel-overlay{position:absolute;inset:0;background:linear-gradient(180deg, transparent 35%, rgba(6,10,20,.94));}
+  .rel-content{position:absolute;left:0;right:0;bottom:0;padding:20px;}
+  .rel-country{font-size:.68rem;letter-spacing:2px;color:var(--moon);font-weight:700;text-transform:uppercase;}
+  .rel-city{font-family:'Instrument Serif',serif;font-size:1.4rem;margin-top:4px;}
+  .rel-sub{font-size:.78rem;color:var(--text-dim);margin-top:4px;}
+
+  /* NEXT JOURNEY */
+  .next-journey{
+    display:flex;align-items:center;justify-content:space-between;gap:20px;flex-wrap:wrap;
+    padding:44px 5vw;margin:0 5vw 80px;border-radius:28px;border:1px solid var(--glass-border);
+    background:linear-gradient(120deg, rgba(96,165,250,0.12), rgba(11,17,32,0.3));
+  }
+  .next-label{font-size:.75rem;letter-spacing:2px;color:var(--text-dim);text-transform:uppercase;margin-bottom:6px;}
+  .next-title{font-family:'Instrument Serif',serif;font-size:1.8rem;}
+
+  footer{padding:40px 5vw;border-top:1px solid var(--glass-border);text-align:center;color:var(--text-dim);font-size:.82rem;}
+
+  @media (max-width:900px){
+    .about-grid{grid-template-columns:1fr;}
+    .gallery-grid{grid-template-columns:1fr 1fr;height:auto;}
+    .gallery-grid > div{height:180px;}
+    .gallery-grid > div:first-child{grid-row:span 1;grid-column:span 2;height:220px;}
+  }
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <a href="index.html" class="nav-logo"><span class="dot"></span>Moonlight Sea</a>
+  <a href="index.html" class="back-link">← All Journeys</a>
+</nav>
+
+<header class="jhero" id="jhero">
+  <div class="jhero-overlay"></div>
+  <div class="jhero-content">
+    <div class="jhero-place" id="jPlace">SEOUL · SOUTH KOREA</div>
+    <h1 class="jhero-title serif" id="jTitle">Neon Hangang</h1>
+    <p class="jhero-sub" id="jDesc">한강을 따라 흐르는 늦은 밤의 신스팝.</p>
+    <div class="jhero-actions">
+      <a href="#player" class="btn btn-primary">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+        Play on YouTube
+      </a>
+      <span class="btn btn-ghost" id="jDuration" style="cursor:default;">⏱ 42 min</span>
+    </div>
+    <div class="tag-row" id="jTags"></div>
+  </div>
+</header>
+
+<section id="about">
+  <div class="section-eyebrow">About This Journey</div>
+  <div class="about-grid">
+    <p class="about-desc" id="jAboutDesc"></p>
+    <div class="meta-list">
+      <div class="meta-row"><span>City</span><span id="metaCity">—</span></div>
+      <div class="meta-row"><span>Country</span><span id="metaCountry">—</span></div>
+      <div class="meta-row"><span>Mood</span><span id="metaMood">—</span></div>
+      <div class="meta-row"><span>Duration</span><span id="metaDuration">—</span></div>
+    </div>
+  </div>
+</section>
+
+<section id="player">
+  <div class="section-eyebrow">Listen</div>
+  <h2 class="section-title">Embedded Journey</h2>
+  <div class="player-wrap" id="playerWrap"></div>
+</section>
+
+<section id="gallery">
+  <div class="section-eyebrow">Gallery</div>
+  <h2 class="section-title">Scenes from the Journey</h2>
+  <div class="gallery-grid" id="galleryGrid"></div>
+</section>
+
+<section id="related">
+  <div class="section-eyebrow">Continue</div>
+  <h2 class="section-title">Related Journeys</h2>
+  <div class="scroll-row" id="relatedRow"></div>
+</section>
+
+<div class="next-journey">
+  <div>
+    <div class="next-label">Next Journey</div>
+    <div class="next-title" id="nextTitle">→</div>
+  </div>
+  <a href="#" id="nextBtn" class="btn btn-primary">Continue Listening</a>
+</div>
+
+<footer>© 2026 Moonlight Sea. Travel Through Music.</footer>
+
+<script>
+  const photoBg = (photo, grad) => photo
+    ? `linear-gradient(160deg, rgba(11,17,32,.35), rgba(11,17,32,.15)), url('${photo}') center/cover no-repeat`
+    : grad;
+
+  const journeys = [
+    {slug:'tokyo-shibuya-after-hours', city:'Tokyo', country:'Japan', title:'Shibuya After Hours', mood:'City Pop', duration:'38 min', grad:'linear-gradient(135deg,#1a1440,#3a2a6b 60%,#5b3d8f)', photo:'images/tokyo-tower-night.jpg',
+      desc:'스크램블 교차로의 불빛과 시티팝 신스가 겹치는 밤. 도쿄가 가장 도쿄다워지는 시간을 걷습니다.', tags:['City Pop','Night Walk','Neon'], youtubeId:'Qx7NzBbdSCA'},
+    {slug:'tokyo-yamanote-late-train', city:'Tokyo', country:'Japan', title:'Last Train on the Yamanote', mood:'Dream Pop', duration:'33 min', grad:'linear-gradient(135deg,#161233,#3a2a6b 60%,#6b4fa8)', photo:'images/tokyo-tower-night.jpg',
+      desc:'막차를 기다리는 야마노테선 플랫폼, 창밖으로 흐르는 도시의 잔상. 몽환적인 드림팝이 밤의 끝자락을 채웁니다.', tags:['Dream Pop','Late Train','Tokyo Night'], youtubeId:'hSCA6A8tVOM'},
+    {slug:'seoul-neon-hangang', city:'Seoul', country:'South Korea', title:'Neon Hangang', mood:'Synth-pop', duration:'42 min', grad:'linear-gradient(135deg,#101a30,#1c3459 60%,#2f5b8f)', photo:'images/seoul-river-night.jpg',
+      desc:'한강을 따라 흐르는 늦은 밤의 신스팝. 도시의 불빛이 강물 위에 번지는 순간을 담은 여정입니다.', tags:['Synth-pop','River','Night Drive'], youtubeId:'t6sovcKvUMw'},
+    {slug:'jeju-island-wind', city:'Jeju', country:'South Korea', title:'Island Wind', mood:'Acoustic', duration:'35 min', grad:'linear-gradient(135deg,#0f2b28,#1d4a42 60%,#2f7a6a)', photo:'images/jeju-cliff.jpg',
+      desc:'현무암 절벽과 바람 소리, 그 위에 얹은 어쿠스틱 기타 한 줄. 육지와는 다른 속도로 흐르는 섬의 시간.', tags:['Acoustic','Coast','Wind'], youtubeId:'5RMlCnpZgoA'},
+    {slug:'gwangju-rain-chungjangro', city:'Gwangju', country:'South Korea', title:'Rain on Chungjang-ro', mood:'Lo-fi Jazz', duration:'31 min', grad:'linear-gradient(135deg,#241a30,#3d2a52 60%,#5c4179)', photo:'images/gwangju-street.jpg',
+      desc:'비 오는 충장로, 젖은 간판 불빛 사이로 스며드는 로파이 재즈. 걸음마저 느려지는 골목의 밤.', tags:['Lo-fi Jazz','Rain','Alley'], youtubeId:'ZmS7dGafMdI'},
+    {slug:'paris-left-bank-nocturne', city:'Paris', country:'France', title:'Left Bank Nocturne', mood:'Chanson', duration:'40 min', grad:'linear-gradient(135deg,#2a1420,#4a2438 60%,#743a58)', photo:'images/paris-eiffel-night.jpg',
+      desc:'좌안의 가로등 불빛과 샹송 한 소절. 에펠탑이 지켜보는 밤의 산책길을 따라갑니다.', tags:['Chanson','Riverside','Romance'], youtubeId:''},
+    {slug:'london-thames-midnight', city:'London', country:'United Kingdom', title:'Thames at Midnight', mood:'Trip-hop', duration:'44 min', grad:'linear-gradient(135deg,#141b26,#243447 60%,#3a5570)', photo:'images/london-thames-night.jpg',
+      desc:'자정의 템스강, 다리 위로 번지는 트립합 비트. 안개마저 리듬을 타는 도시의 밤입니다.', tags:['Trip-hop','Fog','Bridge'], youtubeId:''}
+  ];
+
+  // URL에서 slug 읽기, 없으면 첫 번째 저니로 대체
+  const params = new URLSearchParams(window.location.search);
+  const slug = params.get('slug');
+  let idx = journeys.findIndex(j => j.slug === slug);
+  if (idx === -1) idx = 0;
+  const j = journeys[idx];
+
+  document.title = `${j.title} — Moonlight Sea`;
+  const setMeta = (selector, attr, value) => { const el = document.querySelector(selector); if (el) el.setAttribute(attr, value); };
+  setMeta('meta[name="description"]', 'content', j.desc);
+  setMeta('meta[property="og:title"]', 'content', `${j.title} — Moonlight Sea`);
+  setMeta('meta[property="og:description"]', 'content', j.desc);
+  setMeta('meta[property="og:url"]', 'content', `https://glittery-yeot-c436d1.netlify.app/journey.html?slug=${j.slug}`);
+  setMeta('link[rel="canonical"]', 'href', `https://glittery-yeot-c436d1.netlify.app/journey.html?slug=${j.slug}`);
+  if (j.photo) {
+    const imgUrl = `https://glittery-yeot-c436d1.netlify.app/${j.photo}`;
+    setMeta('meta[property="og:image"]', 'content', imgUrl);
+    setMeta('meta[name="twitter:image"]', 'content', imgUrl);
+  }
+  document.getElementById('jhero').style.background = photoBg(j.photo, j.grad);
+  document.getElementById('jPlace').textContent = `${j.city.toUpperCase()} · ${j.country.toUpperCase()}`;
+  document.getElementById('jTitle').textContent = j.title;
+  document.getElementById('jDesc').textContent = j.desc;
+  document.getElementById('jDuration').textContent = `⏱ ${j.duration}`;
+  document.getElementById('jAboutDesc').textContent = j.desc + ' 이 저니는 ' + j.city + '의 밤을 배경으로 큐레이션된 ' + j.mood + ' 트랙으로 구성되어 있습니다.';
+  document.getElementById('metaCity').textContent = j.city;
+  document.getElementById('metaCountry').textContent = j.country;
+  document.getElementById('metaMood').textContent = j.mood;
+  document.getElementById('metaDuration').textContent = j.duration;
+
+  document.getElementById('jTags').innerHTML = j.tags.map(t => `<span class="tag-chip">${t}</span>`).join('');
+
+  // YouTube 플레이어 (youtubeId가 있으면 임베드, 없으면 플레이스홀더)
+  const playerWrap = document.getElementById('playerWrap');
+  if (j.youtubeId) {
+    const autoplay = params.get('autoplay') === '1';
+    const src = `https://www.youtube.com/embed/${j.youtubeId}?${autoplay ? 'autoplay=1&' : ''}rel=0`;
+    playerWrap.innerHTML = `<iframe src="${src}" title="${j.title}" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>`;
+    if (autoplay) {
+      setTimeout(() => document.getElementById('player').scrollIntoView({behavior:'smooth'}), 150);
+    }
+  } else {
+    playerWrap.style.setProperty('--jphoto', `url('${j.photo || ''}')`);
+    playerWrap.innerHTML = `
+      <div class="player-placeholder">
+        <div class="play-circle">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="#F8FAFC"><path d="M8 5v14l11-7z"/></svg>
+        </div>
+        <p>아직 연결된 영상이 없어요. 유튜브 링크를 준비되면 이 자리에 실제 플레이어가 나타납니다.</p>
+      </div>`;
+  }
+
+  // 갤러리 (사진 1장 + 추가 예정 슬롯)
+  const galleryGrid = document.getElementById('galleryGrid');
+  galleryGrid.innerHTML = `
+    <div style="background-image:${j.photo ? `url('${j.photo}')` : 'none'};background:${photoBg(j.photo, j.grad)}"></div>
+    <div class="gallery-soon">+ 사진 추가</div>
+    <div class="gallery-soon">+ 사진 추가</div>
+  `;
+
+  // Related Journeys (현재 도시 제외, 최대 4개)
+  const relatedRow = document.getElementById('relatedRow');
+  journeys.filter(x => x.slug !== j.slug).slice(0, 5).forEach(r => {
+    const el = document.createElement('a');
+    el.className = 'rel-card';
+    el.href = `journey.html?slug=${r.slug}`;
+    el.innerHTML = `
+      <div class="rel-bg" style="background:${photoBg(r.photo, r.grad)}"></div>
+      <div class="rel-overlay"></div>
+      <div class="rel-content">
+        <div class="rel-country">${r.country}</div>
+        <div class="rel-city">${r.city}</div>
+        <div class="rel-sub">${r.title}</div>
+      </div>
+    `;
+    relatedRow.appendChild(el);
+  });
+
+  // Next Journey (배열 순환)
+  const next = journeys[(idx + 1) % journeys.length];
+  document.getElementById('nextTitle').textContent = `${next.city} — ${next.title}`;
+  document.getElementById('nextBtn').href = `journey.html?slug=${next.slug}`;
+</script>
+
+</body>
+</html>

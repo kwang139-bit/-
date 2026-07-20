@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>City — Moonlight Sea</title>
+<meta name="description" content="Moonlight Sea의 City Guide. 도시별로 큐레이션된 음악 저니와 스토리를 만나보세요.">
+<link rel="canonical" href="https://glittery-yeot-c436d1.netlify.app/city.html">
+
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Moonlight Sea">
+<meta property="og:title" content="City Guide — Moonlight Sea">
+<meta property="og:description" content="도시별로 큐레이션된 음악 저니와 스토리, Moonlight Sea City Guide.">
+<meta property="og:image" content="https://glittery-yeot-c436d1.netlify.app/images/hero-moon-ocean.jpg">
+<meta property="og:url" content="https://glittery-yeot-c436d1.netlify.app/city.html">
+<meta property="og:locale" content="ko_KR">
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="City Guide — Moonlight Sea">
+<meta name="twitter:description" content="도시별로 큐레이션된 음악 저니와 스토리.">
+<meta name="twitter:image" content="https://glittery-yeot-c436d1.netlify.app/images/hero-moon-ocean.jpg">
+
+<link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
+<link rel="apple-touch-icon" sizes="180x180" href="favicon-180.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#0B1120; --bg-deep:#060a14; --accent:#60A5FA; --moon:#FDE68A;
+    --text:#F8FAFC; --text-dim:#94A3B8; --card-radius:24px; --btn-radius:9999px;
+    --glass:rgba(248,250,252,0.06); --glass-border:rgba(248,250,252,0.12);
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{background:var(--bg);color:var(--text);font-family:'Manrope',sans-serif;}
+  .serif{font-family:'Instrument Serif',serif;}
+  a{color:inherit;text-decoration:none;}
+  img{display:block;max-width:100%;}
+
+  .nav{
+    position:sticky;top:0;z-index:100;display:flex;align-items:center;justify-content:space-between;
+    padding:18px 5vw;background:rgba(11,17,32,0.72);backdrop-filter:blur(16px);
+    border-bottom:1px solid var(--glass-border);
+  }
+  .nav-logo{font-family:'Instrument Serif',serif;font-size:1.3rem;display:flex;align-items:center;gap:8px;}
+  .nav-logo .dot{width:7px;height:7px;border-radius:50%;background:var(--moon);box-shadow:0 0 10px var(--moon);}
+  .back-link{font-size:.85rem;color:var(--text-dim);display:flex;align-items:center;gap:6px;transition:color .25s;}
+  .back-link:hover{color:var(--text);}
+
+  /* HERO */
+  .chero{
+    position:relative;min-height:62vh;display:flex;align-items:flex-end;background-size:cover;background-position:center;
+  }
+  .chero-overlay{position:absolute;inset:0;
+    background:linear-gradient(180deg, rgba(6,10,20,0.2) 0%, rgba(6,10,20,0.55) 55%, rgba(6,10,20,0.96) 100%);}
+  .chero-content{position:relative;z-index:2;padding:64px 5vw 48px;}
+  .chero-eyebrow{font-size:.78rem;letter-spacing:3px;color:var(--accent);font-weight:700;text-transform:uppercase;margin-bottom:16px;}
+  .chero-title{font-family:'Instrument Serif',serif;font-size:clamp(3rem,7vw,6rem);}
+  .chero-tagline{margin-top:12px;color:var(--text-dim);font-size:1.05rem;max-width:50ch;}
+  .chero-meta{margin-top:18px;font-size:.85rem;color:var(--text-dim);}
+
+  section{padding:80px 5vw;}
+  .section-eyebrow{font-size:.72rem;letter-spacing:3px;color:var(--accent);font-weight:700;text-transform:uppercase;margin-bottom:14px;}
+  .section-title{font-family:'Instrument Serif',serif;font-size:clamp(1.7rem,3vw,2.3rem);margin-bottom:28px;}
+  .empty-state{color:var(--text-dim);font-size:.9rem;padding:28px;border:1px dashed var(--glass-border);border-radius:20px;background:var(--glass);}
+
+  /* JOURNEY LIST */
+  .journey-list{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:20px;}
+  .jl-card{position:relative;height:320px;border-radius:var(--card-radius);overflow:hidden;display:block;
+    border:1px solid var(--glass-border);transition:transform .4s ease, box-shadow .4s ease;}
+  .jl-card:hover{transform:translateY(-6px);box-shadow:0 20px 50px -14px rgba(96,165,250,.35);}
+  .jl-bg{position:absolute;inset:0;background-size:cover;background-position:center;}
+  .jl-overlay{position:absolute;inset:0;background:linear-gradient(180deg, transparent 35%, rgba(6,10,20,.94));}
+  .jl-content{position:absolute;left:0;right:0;bottom:0;padding:22px;}
+  .jl-mood{font-size:.7rem;letter-spacing:2px;color:var(--moon);font-weight:700;text-transform:uppercase;}
+  .jl-title{font-family:'Instrument Serif',serif;font-size:1.5rem;margin-top:6px;}
+  .jl-duration{position:absolute;top:16px;right:16px;background:rgba(6,10,20,.55);backdrop-filter:blur(6px);
+    padding:5px 12px;border-radius:var(--btn-radius);font-size:.7rem;font-weight:700;}
+
+  /* STORIES */
+  .story-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:20px;}
+  .story-card{position:relative;height:260px;border-radius:var(--card-radius);overflow:hidden;display:block;
+    border:1px solid var(--glass-border);transition:transform .4s ease, box-shadow .4s ease;}
+  .story-card:hover{transform:translateY(-6px);box-shadow:0 20px 50px -14px rgba(96,165,250,.3);}
+  .story-bg{position:absolute;inset:0;background-size:cover;background-position:center;}
+  .story-overlay{position:absolute;inset:0;background:linear-gradient(180deg, transparent 30%, rgba(6,10,20,.94));}
+  .story-body{position:absolute;left:0;right:0;bottom:0;padding:22px;}
+  .story-read{font-size:.68rem;color:var(--moon);font-weight:700;letter-spacing:1.5px;text-transform:uppercase;margin-bottom:6px;}
+  .story-title{font-family:'Instrument Serif',serif;font-size:1.3rem;}
+
+  /* RELATED CITIES */
+  .scroll-row{display:flex;gap:20px;overflow-x:auto;padding-bottom:10px;scroll-snap-type:x proximity;
+    -ms-overflow-style:none;scrollbar-width:none;}
+  .scroll-row::-webkit-scrollbar{display:none;}
+  .rc-card{position:relative;flex:0 0 220px;height:280px;border-radius:var(--card-radius);overflow:hidden;
+    scroll-snap-align:start;display:block;border:1px solid var(--glass-border);
+    transition:transform .4s ease, box-shadow .4s ease;}
+  .rc-card:hover{transform:translateY(-6px);box-shadow:0 20px 50px -14px rgba(96,165,250,.35);}
+  .rc-bg{position:absolute;inset:0;background-size:cover;background-position:center;}
+  .rc-overlay{position:absolute;inset:0;background:linear-gradient(180deg, transparent 35%, rgba(6,10,20,.94));}
+  .rc-name{position:absolute;left:18px;bottom:18px;font-family:'Instrument Serif',serif;font-size:1.35rem;}
+
+  footer{padding:40px 5vw;border-top:1px solid var(--glass-border);text-align:center;color:var(--text-dim);font-size:.82rem;}
+
+  @media (max-width:600px){
+    .journey-list, .story-grid{grid-template-columns:1fr 1fr;}
+  }
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <a href="index.html" class="nav-logo"><span class="dot"></span>Moonlight Sea</a>
+  <a href="index.html" class="back-link">← All Cities</a>
+</nav>
+
+<header class="chero" id="cHero">
+  <div class="chero-overlay"></div>
+  <div class="chero-content">
+    <div class="chero-eyebrow">City Guide</div>
+    <h1 class="chero-title serif" id="cName">Seoul</h1>
+    <p class="chero-tagline" id="cTagline">강물에 비친 도시의 불빛</p>
+    <p class="chero-meta" id="cCount">9 Journeys</p>
+  </div>
+</header>
+
+<section id="journeys">
+  <div class="section-eyebrow">Curated for this City</div>
+  <h2 class="section-title" id="jlTitle">Journeys in Seoul</h2>
+  <div class="journey-list" id="journeyList"></div>
+</section>
+
+<section id="stories">
+  <div class="section-eyebrow">Magazine</div>
+  <h2 class="section-title">Stories</h2>
+  <div id="storySlot"></div>
+</section>
+
+<section id="related-cities">
+  <div class="section-eyebrow">Explore More</div>
+  <h2 class="section-title">Related Cities</h2>
+  <div class="scroll-row" id="relatedCityRow"></div>
+</section>
+
+<footer>© 2026 Moonlight Sea. Travel Through Music.</footer>
+
+<script>
+  const photoBg = (photo, grad) => photo
+    ? `linear-gradient(160deg, rgba(11,17,32,.35), rgba(11,17,32,.15)), url('${photo}') center/cover no-repeat`
+    : grad;
+
+  const journeys = [
+    {slug:'tokyo-shibuya-after-hours', city:'Tokyo', country:'Japan', title:'Shibuya After Hours', mood:'City Pop', duration:'38 min', grad:'linear-gradient(135deg,#1a1440,#3a2a6b 60%,#5b3d8f)', photo:'images/tokyo-tower-night.jpg'},
+    {slug:'tokyo-yamanote-late-train', city:'Tokyo', country:'Japan', title:'Last Train on the Yamanote', mood:'Dream Pop', duration:'33 min', grad:'linear-gradient(135deg,#161233,#3a2a6b 60%,#6b4fa8)', photo:'images/tokyo-tower-night.jpg'},
+    {slug:'seoul-neon-hangang', city:'Seoul', country:'South Korea', title:'Neon Hangang', mood:'Synth-pop', duration:'42 min', grad:'linear-gradient(135deg,#101a30,#1c3459 60%,#2f5b8f)', photo:'images/seoul-river-night.jpg'},
+    {slug:'jeju-island-wind', city:'Jeju', country:'South Korea', title:'Island Wind', mood:'Acoustic', duration:'35 min', grad:'linear-gradient(135deg,#0f2b28,#1d4a42 60%,#2f7a6a)', photo:'images/jeju-cliff.jpg'},
+    {slug:'gwangju-rain-chungjangro', city:'Gwangju', country:'South Korea', title:'Rain on Chungjang-ro', mood:'Lo-fi Jazz', duration:'31 min', grad:'linear-gradient(135deg,#241a30,#3d2a52 60%,#5c4179)', photo:'images/gwangju-street.jpg'},
+    {slug:'paris-left-bank-nocturne', city:'Paris', country:'France', title:'Left Bank Nocturne', mood:'Chanson', duration:'40 min', grad:'linear-gradient(135deg,#2a1420,#4a2438 60%,#743a58)', photo:'images/paris-eiffel-night.jpg'},
+    {slug:'london-thames-midnight', city:'London', country:'United Kingdom', title:'Thames at Midnight', mood:'Trip-hop', duration:'44 min', grad:'linear-gradient(135deg,#141b26,#243447 60%,#3a5570)', photo:'images/london-thames-night.jpg'}
+  ];
+
+  const cities = [
+    {name:'Tokyo', count:'12 Journeys', tagline:'네온이 흐르는 도시의 심장', grad:'linear-gradient(160deg,#1a1440,#5b3d8f)', photo:'images/tokyo-tower-night.jpg'},
+    {name:'Seoul', count:'9 Journeys', tagline:'강물에 비친 도시의 불빛', grad:'linear-gradient(160deg,#101a30,#2f5b8f)', photo:'images/seoul-river-night.jpg'},
+    {name:'Jeju', count:'6 Journeys', tagline:'바람과 파도가 만든 리듬', grad:'linear-gradient(160deg,#0f2b28,#2f7a6a)', photo:'images/jeju-cliff.jpg'},
+    {name:'Gwangju', count:'5 Journeys', tagline:'빗소리와 재즈가 만나는 골목', grad:'linear-gradient(160deg,#241a30,#5c4179)', photo:'images/gwangju-street.jpg'},
+    {name:'Paris', count:'7 Journeys', tagline:'가로등 아래 흐르는 샹송', grad:'linear-gradient(160deg,#2a1420,#743a58)', photo:'images/paris-eiffel-night.jpg'},
+    {name:'London', count:'6 Journeys', tagline:'안개 속에서 울리는 베이스', grad:'linear-gradient(160deg,#141b26,#3a5570)', photo:'images/london-thames-night.jpg'}
+  ];
+
+  const stories = [
+    {slug:'gwangju-jazz-alley', title:'광주의 밤, 재즈가 흐르는 골목', read:'8 min read', grad:'linear-gradient(160deg,#241a30,#5c4179)', photo:'images/gwangju-street.jpg', city:'Gwangju'},
+    {slug:'why-tokyo-sounds-like-neon', title:'Why Tokyo Sounds Like Neon', read:'5 min read', grad:'linear-gradient(160deg,#1a1440,#5b3d8f)', photo:'images/tokyo-tower-night.jpg', city:'Tokyo'},
+    {slug:'jeju-in-3-4-time', title:'Jeju, in 3/4 Time', read:'4 min read', grad:'linear-gradient(160deg,#0f2b28,#2f7a6a)', photo:'images/jeju-cliff.jpg', city:'Jeju'}
+  ];
+
+  // URL에서 city 읽기, 없으면 첫 번째 도시로 대체
+  const params = new URLSearchParams(window.location.search);
+  const cityName = params.get('city');
+  let city = cities.find(c => c.name === cityName) || cities[0];
+
+  document.title = `${city.name} — Moonlight Sea`;
+  const setMeta = (selector, attr, value) => { const el = document.querySelector(selector); if (el) el.setAttribute(attr, value); };
+  setMeta('meta[name="description"]', 'content', `${city.name} — ${city.tagline}. Moonlight Sea에서 큐레이션된 저니를 만나보세요.`);
+  setMeta('meta[property="og:title"]', 'content', `${city.name} — Moonlight Sea`);
+  setMeta('meta[property="og:description"]', 'content', city.tagline);
+  setMeta('meta[property="og:url"]', 'content', `https://glittery-yeot-c436d1.netlify.app/city.html?city=${encodeURIComponent(city.name)}`);
+  setMeta('link[rel="canonical"]', 'href', `https://glittery-yeot-c436d1.netlify.app/city.html?city=${encodeURIComponent(city.name)}`);
+  if (city.photo) {
+    const imgUrl = `https://glittery-yeot-c436d1.netlify.app/${city.photo}`;
+    setMeta('meta[property="og:image"]', 'content', imgUrl);
+    setMeta('meta[name="twitter:image"]', 'content', imgUrl);
+  }
+  document.getElementById('cHero').style.background = photoBg(city.photo, city.grad);
+  document.getElementById('cName').textContent = city.name;
+  document.getElementById('cTagline').textContent = city.tagline;
+  document.getElementById('cCount').textContent = city.count;
+  document.getElementById('jlTitle').textContent = `Journeys in ${city.name}`;
+
+  // Journey List (해당 도시 저니만 필터링)
+  const cityJourneys = journeys.filter(j => j.city === city.name);
+  const journeyList = document.getElementById('journeyList');
+  if (cityJourneys.length) {
+    cityJourneys.forEach(j => {
+      const el = document.createElement('a');
+      el.className = 'jl-card';
+      el.href = `journey.html?slug=${j.slug}`;
+      el.innerHTML = `
+        <div class="jl-bg" style="background:${photoBg(j.photo, j.grad)}"></div>
+        <div class="jl-overlay"></div>
+        <div class="jl-duration">${j.duration}</div>
+        <div class="jl-content">
+          <div class="jl-mood">${j.mood}</div>
+          <div class="jl-title">${j.title}</div>
+        </div>
+      `;
+      journeyList.appendChild(el);
+    });
+  } else {
+    journeyList.innerHTML = `<div class="empty-state">아직 등록된 저니가 없어요. 곧 채워질 예정입니다.</div>`;
+  }
+
+  // Stories (해당 도시 관련 스토리만)
+  const cityStories = stories.filter(s => s.city === city.name);
+  const storySlot = document.getElementById('storySlot');
+  if (cityStories.length) {
+    const grid = document.createElement('div');
+    grid.className = 'story-grid';
+    cityStories.forEach(s => {
+      const el = document.createElement('a');
+      el.className = 'story-card';
+      el.href = `story.html?slug=${s.slug}`;
+      el.innerHTML = `
+        <div class="story-bg" style="background:${photoBg(s.photo, s.grad)}"></div>
+        <div class="story-overlay"></div>
+        <div class="story-body">
+          <div class="story-read">${s.read}</div>
+          <div class="story-title">${s.title}</div>
+        </div>
+      `;
+      grid.appendChild(el);
+    });
+    storySlot.appendChild(grid);
+  } else {
+    storySlot.innerHTML = `<div class="empty-state">${city.name}에 대한 스토리가 아직 없어요. 곧 준비할게요.</div>`;
+  }
+
+  // Related Cities (현재 도시 제외)
+  const relatedCityRow = document.getElementById('relatedCityRow');
+  cities.filter(c => c.name !== city.name).forEach(c => {
+    const el = document.createElement('a');
+    el.className = 'rc-card';
+    el.href = `city.html?city=${encodeURIComponent(c.name)}`;
+    el.innerHTML = `
+      <div class="rc-bg" style="background:${photoBg(c.photo, c.grad)}"></div>
+      <div class="rc-overlay"></div>
+      <div class="rc-name">${c.name}</div>
+    `;
+    relatedCityRow.appendChild(el);
+  });
+</script>
+
+</body>
+</html>
